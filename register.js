@@ -6,17 +6,24 @@ const registerRePassword = document.querySelector('#registerRePassword');
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
 
+let finalPassword;
+
+const obj = {
+    email : '',
+    password : '',
+}
+
 
 registerForm.addEventListener('submit', event => {
     event.preventDefault();
-    console.log(registerName.value);
     if (emailRegex.test(registerEmail.value)) {
-        console.log(registerEmail.value);
+        obj.email = registerEmail.value;
     }else{
         alert('email is invalid')
     }
+
     if (passwordRegex.test(registerPassword.value)) {
-        console.log(registerRePassword.value);
+        console.log(registerPassword.value);
     }else{
         alert(`Password must have the following:
 1. Minimum Length: 8 characters,
@@ -26,10 +33,24 @@ registerForm.addEventListener('submit', event => {
 5. At least one special character: !@#$%^&*().
             `)
     }
+
     if (registerPassword.value != registerRePassword.value) {
         alert('Passwords do not match');
+    }else{
+        finalPassword = registerPassword.value;
     }
-    // console.log(registerEmail.value);
-    console.log(registerPassword.value);
-    console.log(registerRePassword.value);
-})
+
+    if (passwordRegex.test(registerPassword.value) && registerPassword.value === registerRePassword.value) {
+        obj.password = registerPassword.value;
+    }
+    
+    if (emailRegex.test(registerEmail.value) && passwordRegex.test(registerPassword.value) && registerPassword.value === registerRePassword.value) {
+        goToLogin();
+    }
+});
+
+
+function goToLogin() {
+    localStorage.setItem('registerData', JSON.stringify(obj));
+    window.location = 'index.html';
+}
