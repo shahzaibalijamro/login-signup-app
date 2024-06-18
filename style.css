@@ -75,7 +75,7 @@
   }
   
   .button-submit {
-    margin: 20px 0 10px 0;
+    margin: 20px 0 0 0;
     background-color: #151717;
     border: none;
     color: white;
@@ -119,4 +119,15 @@
     ;
   }
   
-      
+  #indicator{
+    font-size: 14px;
+    color: red;
+  }
+
+
+  @media(max-width:500px){
+    .form{
+      padding: 20px;
+      margin: 0 15px;
+    }
+  }
